@@ -26,6 +26,7 @@ This hack includes :
 * Base firmware : 2.1.1_20160429113900
 * Telnet server activated
 * FTP server activated
+* Original chinese voice replaced with english voice
 
 Warning about some models that are usable only in China
 =======================================================
@@ -57,7 +58,7 @@ Start the camera
 * If plugged, unplug the Yi camera
 * Insert the memory card in the Yi camera
 * Plug the Yi camera
-* Follow chinese instructions to pair with your android app. This is only needed the first time.
+* Follow english instructions to pair with your android app. This is only needed the first time.
 
 The camera will start. The led will indicate the current status :
 * yellow : camera startup
@@ -109,7 +110,7 @@ How it works ?
 Hack content
 ------------
 
-```
+````
 home.bin                       Official firmware 2.1.1_20160429113900
 test/                          Yi hack folder
   factory_test.sh              This script is called on camera startup and will launch all the needed processes
@@ -117,6 +118,7 @@ test/                          Yi hack folder
   v2/
     bin/
       tinyftp                  FTP server (https://sourceforge.net/projects/tinyftp/)
+      yihackv2.so              Native library to provide hacked features
 ````
 
 

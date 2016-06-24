@@ -16,6 +16,11 @@ if [ -f /sdcard/test/v2/bin/tinyftp ]; then
 	/sdcard/test/v2/bin/tinyftp -p 21 -c / &
 fi
 
+# Main hack
+if [ -f /sdcard/test/v2/bin/yihackv2.so ]; then
+	export LD_PRELOAD=/sdcard/test/v2/bin/yihackv2.so
+fi
+
 # Duplicate main.sh original commands
 
 /bak/usr/local/bin/gpio_check.sh
