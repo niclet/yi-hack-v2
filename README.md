@@ -26,7 +26,7 @@ This hack includes :
 * Base firmware : 2.1.1_20160429113900
 * Telnet server activated
 * FTP server activated
-* Original chinese voice replaced with english voice
+* Ability to choose voice between Chinese, English and French
 
 Warning about some models that are usable only in China
 =======================================================
@@ -119,6 +119,9 @@ test/                          Yi hack folder
     bin/
       tinyftp                  FTP server (https://sourceforge.net/projects/tinyftp/)
       yihackv2.so              Native library to provide hacked features
+    audio/
+      fr/
+        *                      French voice files
 ````
 
 
