@@ -16,7 +16,14 @@ if [ -f /sdcard/test/v2/bin/tinyftp ]; then
 	/sdcard/test/v2/bin/tinyftp -p 21 -c / &
 fi
 
+# Setup audio language :
+# cn : official, available on camera
+# us : unofficial, partially available on camera
+# fr : unofficial, available on sdcard
+export YIHACKV2_LANGUAGE=fr
+
 # Main hack
+rm -f /sdcard/test/yihackv2.log
 if [ -f /sdcard/test/v2/bin/yihackv2.so ]; then
 	export LD_PRELOAD=/sdcard/test/v2/bin/yihackv2.so
 fi
