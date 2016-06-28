@@ -117,7 +117,7 @@ test/                          Yi hack folder
   factory_test.log             Log file of the hack (filled by factory_test.sh)
   v2/
     bin/
-      tinyftp                  FTP server (https://sourceforge.net/projects/tinyftp/)
+      tcpsvd                   TCP Service Daemon (http://smarden.org/ipsvd/index.html) to launch FTP Server (ftpd)
       yihackv2.so              Native library to provide hacked features
     audio/
       fr/

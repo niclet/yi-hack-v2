@@ -12,8 +12,8 @@ fi
 telnetd -l /bin/sh &
 
 # Launch ftp server
-if [ -f /sdcard/test/v2/bin/tinyftp ]; then
-	/sdcard/test/v2/bin/tinyftp -p 21 -c / &
+if [ -f /sdcard/test/tcpsvd ]; then
+	/sdcard/test/tcpsvd -vE 0.0.0.0 21 ftpd / &
 fi
 
 # Setup audio language :
@@ -24,7 +24,7 @@ export YIHACKV2_LANGUAGE=fr
 
 # Main hack
 rm -f /sdcard/test/yihackv2.log
-if [ -f /sdcard/test/v2/bin/yihackv2.so ]; then
+	if [ -f /sdcard/test/v2/bin/yihackv2.so ]; then
 	export LD_PRELOAD=/sdcard/test/v2/bin/yihackv2.so
 fi
 
