@@ -12,8 +12,8 @@ fi
 telnetd -l /bin/sh &
 
 # Launch ftp server
-if [ -f /sdcard/test/tcpsvd ]; then
-	/sdcard/test/tcpsvd -vE 0.0.0.0 21 ftpd / &
+if [ -f /sdcard/test/v2/bin/tcpsvd ]; then
+	/sdcard/test/v2/bin/tcpsvd -vE 0.0.0.0 21 ftpd / &
 fi
 
 # Setup audio language :
