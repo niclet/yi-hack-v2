@@ -29,7 +29,7 @@ This hack includes :
 * Ability to choose voice between Chinese, English and French
 * Ability to choose timezone and format of date/time embedded in the video
 
-In early alpha state :
+In early alpha stage :
 * Ability to disable Chinese cloud
 * Ability to activate RTSP server
 
@@ -105,6 +105,8 @@ You must also modify **test/wpa_supplicant.conf** to be compliant with your own 
 Please note that when you activate RTSP server, you can't use your mobile app anymore.
 
 When camera becomes ready, the light remains green, contrary to official startup which ends up with a blue light.
+
+Main stream is available from rtsp://\<IP\>/stream1
 
 
 I want more !
