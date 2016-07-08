@@ -147,6 +147,8 @@ test/                          Yi hack folder
     scripts/
       startup_modified.sh      This script is called from factory_test.sh when MODIFIED startup (aka RTSP server) is activated
       startup_official.sh      This script is called from factory_test.sh when OFFICIAL startup is activated
+  wpa_supplicant.conf          This config file must be correctly filled to connect the camera to your wifi network when RTSP feature is enabled
+  yi-hack-v2.cfg               This config file lets you tune up various behaviors
 ````
 
 
