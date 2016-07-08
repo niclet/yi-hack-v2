@@ -36,7 +36,11 @@ In early alpha stage :
 Warning about some models that are usable only in China
 =======================================================
 
-My camera is a CN model, thus it can't be paired with a smartphone outside China. Thanks to https://diy.2pmc.net/solved-xiaomi-xiao-yi-ant-home-camera-can-used-china/ an old firmware (2.1.1_20160429113900) is available and make this CN model pairable with an Android device app (http://app.mi.com/detail/75646). It can also be paired with an iOS device if you succeed in installing Yi Home from Chinese App Store. The firmware comes from http://yi-version.qiniudn.com/@/familymonitor-h21/2.1.1_20160429113900home
+My camera is a CN model, thus it can't be paired with a smartphone outside China.
+
+Thanks to https://diy.2pmc.net/solved-xiaomi-xiao-yi-ant-home-camera-can-used-china/ an old firmware (2.1.1_20160429113900) is available and make this CN model pairable with an Android device app (http://app.mi.com/detail/75646). It can also be paired with an iOS device if you succeed in installing Yi Home from Chinese App Store (tutorial is coming soon).
+
+The firmware comes from http://yi-version.qiniudn.com/@/familymonitor-h21/2.1.1_20160429113900home
 
 Installation on the Yi camera
 =============================
