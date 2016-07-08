@@ -4,83 +4,61 @@
 # We restart if with useless param and redirect output to log file on sdcard
 
 if [ $# -eq 0 ]; then
-   $0 nop > /sdcard/test/factory_test.log 2>&1 
+   export YI_HACK_LOGS=/sdcard/test/logs
+   mkdir -p "$YI_HACK_LOGS"
+   $0 nop > "$YI_HACK_LOGS/factory_test.log" 2>&1
    exit $?
 fi
 
-# Launch telnet server without authentication
-telnetd -l /bin/sh &
+# Export all variables available in yi-hack-v2.cfg
+if [ -f /sdcard/test/yi-hack-v2.cfg ]; then
+   echo "### Export variables ... ###"
+   while read assignment; do
+      if [ "${assignment:0:8}" = "YI_HACK_" ]; then
+         echo -e "export \"$assignment\""
+         export "$assignment"
+      fi
+   done < /sdcard/test/yi-hack-v2.cfg
+   echo
+fi
+
+# Telnet server activation (no authentication required)
+if [ "$YI_HACK_TELNET_SERVER" = "YES" ]; then
+   echo "### Activating telnet server ... ###"
+   telnetd -l /bin/sh &
+   echo
+fi
 
 # Launch ftp server
-if [ -f /sdcard/test/v2/bin/tcpsvd ]; then
-	/sdcard/test/v2/bin/tcpsvd -vE 0.0.0.0 21 ftpd / &
+if [ "$YI_HACK_FTP_SERVER" = "YES" ]; then
+   if [ -f /sdcard/test/v2/bin/tcpsvd ]; then
+      echo "### Activating FTP server ... ###"
+      /sdcard/test/v2/bin/tcpsvd -vE 0.0.0.0 21 ftpd / &
+      sleep 1s
+      echo
+   fi
 fi
-
-# Setup audio language :
-# cn : official, available on camera
-# us : unofficial, partially available on camera
-# fr : unofficial, available on sdcard
-export YIHACKV2_LANGUAGE=fr
 
 # Main hack
-rm -f /sdcard/test/yihackv2.log
-	if [ -f /sdcard/test/v2/bin/yihackv2.so ]; then
-	export LD_PRELOAD=/sdcard/test/v2/bin/yihackv2.so
+rm -f "$YI_HACK_NATIVE_TRACES"
+#if [ -f /sdcard/test/v2/bin/yihackv2.so ]; then
+#   export LD_PRELOAD=/sdcard/test/v2/bin/yihackv2.so
+#fi
+if [ -f /sdcard/test/v2/bin/libyihackv2.so ]; then
+   export LD_PRELOAD=/sdcard/test/v2/bin/libyihackv2.so
 fi
 
-# Duplicate main.sh original commands
-
-/bak/usr/local/bin/gpio_check.sh
-value=$?
-echo ${value}
-
-if [ ${value} = 2 ]
-then
-	echo "###Focus Mode###"
-	/bak/usr/local/bin/lens_focus.sh
-	exit
-elif [ ${value} = 3 ]
-then
-	echo "###Wifi Mode###"
-	/bak/usr/local/bin/wifi_mfg.sh
-	exit
-else
-	echo "###Normal Boot###"
-fi
-
-######## get config ######
+# Mount config
 mkdir -p /mnt/cfg
-#/usr/sbin/ubiattach /dev/ubi_ctrl -m 8
-#mount -t ubifs ubi2_1 /mnt/cfg
-mount -t  jffs2  /dev/mtdblock8  /mnt/cfg 
+mount -t jffs2 /dev/mtdblock8 /mnt/cfg
 
-######## wifi ########
-/bak/usr/local/bin/usb_wifi.sh
-value=$?
-echo ${value}
-
-if [ ${value} = 1 ]
-then
-      echo "@@@we do not launch ipc@@@"
-      exit
+# Launch expected startup
+if [ "$YI_HACK_STARTUP_MODE" = "MODIFIED" ]; then
+   if [ -f /sdcard/test/v2/scripts/startup_modified.sh ]; then
+      /sdcard/test/v2/scripts/startup_modified.sh
+   fi
+else
+   if [ -f /sdcard/test/v2/scripts/startup_official.sh ]; then
+      /sdcard/test/v2/scripts/startup_official.sh
+   fi
 fi
-### 2018 by pass
-/usr/local/bin/amba_debug -g 51 -d 0x1
-
-######## cryptography engine ########
-modprobe ambarella_crypto config_polling_mode=1
-modprobe ambac
-
-######## ipc #########
-modprobe pwm_bl
-
-modprobe mn34220pl bus_addr=0x36
-/usr/local/bin/init.sh --na
-
-#miio
-/usr/local/bin/mosquitto -c /etc/mosquitto.conf -d
-
-
-#real init ipc
-/home/web/show_stack &
-/home/web/ipc -w 2>&1 | /home/web/logrunner ipc.log &

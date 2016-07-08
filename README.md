@@ -27,11 +27,16 @@ This hack includes :
 * Telnet server activated
 * FTP server activated
 * Ability to choose voice between Chinese, English and French
+* Ability to choose timezone and format of date/time embedded in the video
+
+In early alpha state :
+* Ability to disable Chinese cloud
+* Ability to activate RTSP server
 
 Warning about some models that are usable only in China
 =======================================================
 
-My camera is a CN model, thus it can't be paired with a smartphone outside China. Thanks to https://diy.2pmc.net/solved-xiaomi-xiao-yi-ant-home-camera-can-used-china/ an old firmware (2.1.1_20160429113900) is available and make this CN model pairable with an Android device app (http://app.mi.com/detail/75646). The firmware comes from http://yi-version.qiniudn.com/@/familymonitor-h21/2.1.1_20160429113900home
+My camera is a CN model, thus it can't be paired with a smartphone outside China. Thanks to https://diy.2pmc.net/solved-xiaomi-xiao-yi-ant-home-camera-can-used-china/ an old firmware (2.1.1_20160429113900) is available and make this CN model pairable with an Android device app (http://app.mi.com/detail/75646). It can also be paired with an iOS device if you succeed in installing Yi Home from Chinese App Store. The firmware comes from http://yi-version.qiniudn.com/@/familymonitor-h21/2.1.1_20160429113900home
 
 Installation on the Yi camera
 =============================
@@ -58,11 +63,11 @@ Start the camera
 * If plugged, unplug the Yi camera
 * Insert the memory card in the Yi camera
 * Plug the Yi camera
-* Follow english instructions to pair with your android app. This is only needed the first time.
+* Follow instructions to pair with your mobile app. This is only needed the first time.
 
 The camera will start. The led will indicate the current status :
 * yellow : camera startup
-* blue blinking : network configuration in progress (connec to wifi, set up the IP address)
+* blue blinking : network configuration in progress (connect to wifi, set up the IP address)
 * blue : network configuration is OK. Camera is ready to use.
 
 How can I know which is the version of a firmware 'home.bin' file ?
@@ -84,12 +89,22 @@ The telnet server is on port 23.
 
 No authentication is needed, default user is root.
 
-Ftp server
+FTP server
 ----------
 
-The ftp server is on port 21.
+The FTP server is on port 21.
 
-No authentication is needed, you can use anonymouse user.
+No authentication is needed, you can use anonymous user.
+
+RTSP server
+-----------
+To activate the RTSP server, you need to modify **test/yi-hack-v2.cfg** and uncomment the line YI\_HACK\_STARTUP\_MODE=MODIFIED
+
+You must also modify **test/wpa_supplicant.conf** to be compliant with your own wifi network.
+
+Please note that when you activate RTSP server, you can't use your mobile app anymore.
+
+When camera becomes ready, the light remains green, contrary to official startup which ends up with a blue light.
 
 
 I want more !
@@ -114,14 +129,18 @@ Hack content
 home.bin                       Official firmware 2.1.1_20160429113900
 test/                          Yi hack folder
   factory_test.sh              This script is called on camera startup and will launch all the needed processes
-  factory_test.log             Log file of the hack (filled by factory_test.sh)
+  logs/
+    factory_test.log           Log file of the hack (filled by factory_test.sh)
   v2/
-    bin/
-      tcpsvd                   TCP Service Daemon (http://smarden.org/ipsvd/index.html) to launch FTP Server (ftpd)
-      yihackv2.so              Native library to provide hacked features
     audio/
       fr/
         *                      French voice files
+    bin/
+      libyihackv2.so           Native library to provide hacked features
+      tcpsvd                   TCP Service Daemon (http://smarden.org/ipsvd/index.html) to launch FTP Server (ftpd)
+    scripts/
+      startup_modified.sh      This script is called from factory_test.sh when MODIFIED startup (aka RTSP server) is activated
+      startup_official.sh      This script is called from factory_test.sh when OFFICIAL startup is activated
 ````
 
 
