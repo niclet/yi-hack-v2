@@ -43,7 +43,28 @@ ifconfig mlan0 up
 # Set wifi countrycode
 /lib/firmware/mrvl/mlanutl mlan0 countrycode CN
 
+# Init led
+/sdcard/test/v2/scripts/led.sh red init     
+/sdcard/test/v2/scripts/led.sh green init   
+/sdcard/test/v2/scripts/led.sh blue init  
+
+# Make blue led flash during wifi connection
+/sdcard/test/v2/scripts/led.sh red off
+/sdcard/test/v2/scripts/led.sh green off
+/sdcard/test/v2/scripts/led.sh blue flash
+
+# Connect to wifi
 wifi_auto.sh
+
+if [ $? != 0 ]; then
+   # Turn off blue led and turn on red led, wifi is KO
+   /sdcard/test/v2/scripts/led.sh blue off
+   /sdcard/test/v2/scripts/led.sh red on
+   exit 1
+fi
+
+# Turn on blue led, wifi is OK
+/sdcard/test/v2/scripts/led.sh blue on
 
 # MN34220PL 1/3 -Inch, 1944x1213, 2.4-Megapixel CMOS Digital Image Sensor
 modprobe mn34220pl bus_addr=0x36
@@ -54,3 +75,5 @@ modprobe mn34220pl bus_addr=0x36
 /usr/local/bin/test_encode -A -i 1920x1080 --bitrate 1200000 -f 25 --enc-mode 4 --hdr-expo 2 --hdr-mode 1 -J --btype off  -K --btype off -X --bmaxsize 1920x1080 --bsize 1920x1080 --smaxsize 1920x1080 -Y --bmaxsize 640x360 --bsize 640x360 -B -m 640x360 --smaxsize 640x360
 /usr/local/bin/rtsp_server &
 /usr/local/bin/test_encode -A -h 1080p -e --bitrate 1200000
+/usr/local/bin/test_encode -B -e
+

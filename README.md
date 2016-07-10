@@ -108,9 +108,14 @@ You must also modify **test/wpa_supplicant.conf** to be compliant with your own 
 
 Please note that when you activate RTSP server, you can't use your mobile app anymore.
 
-When camera becomes ready, the light remains green, contrary to official startup which ends up with a blue light.
+During camera startup, the led will indicate the current status :
+* yellow : camera startup
+* blue blinking : network configuration in progress (connect to wifi, set up the IP address)
+* blue : network configuration is OK. Camera is ready to use.
+* red : network configuration is KO. You should check your **wpa_supplicant.conf** file
 
 Main stream is available from rtsp://\<IP\>/stream1
+A secondary MJPEG stream is also available from rtsp://\<IP\>/stream2
 
 
 I want more !
@@ -145,6 +150,7 @@ test/                          Yi hack folder
       libyihackv2.so           Native library to provide hacked features
       tcpsvd                   TCP Service Daemon (http://smarden.org/ipsvd/index.html) to launch FTP Server (ftpd)
     scripts/
+      led.sh                   This script lets manipulate the led state
       startup_modified.sh      This script is called from factory_test.sh when MODIFIED startup (aka RTSP server) is activated
       startup_official.sh      This script is called from factory_test.sh when OFFICIAL startup is activated
   wpa_supplicant.conf          This config file must be correctly filled to connect the camera to your wifi network when RTSP feature is enabled
