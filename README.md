@@ -112,9 +112,10 @@ During camera startup, the led will indicate the current status :
 * yellow : camera startup
 * blue blinking : network configuration in progress (connect to wifi, set up the IP address)
 * blue : network configuration is OK. Camera is ready to use.
-* red : network configuration is KO. You should check your **wpa_supplicant.conf** file
+* red : network configuration is KO. You should check your **test/wpa_supplicant.conf** file
 
 Main stream is available from rtsp://\<IP\>/stream1
+
 A secondary MJPEG stream is also available from rtsp://\<IP\>/stream2
 
 
