@@ -33,7 +33,7 @@ fi
 if [ "$YI_HACK_FTP_SERVER" = "YES" ]; then
    if [ -f /sdcard/test/v2/bin/tcpsvd ]; then
       echo "### Activating FTP server ... ###"
-      /sdcard/test/v2/bin/tcpsvd -vE 0.0.0.0 21 ftpd / &
+      /sdcard/test/v2/bin/tcpsvd -vE 0.0.0.0 21 ftpd -w / &
       sleep 1s
       echo
    fi
