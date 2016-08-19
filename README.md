@@ -2,7 +2,7 @@
 Yi-hack-v2 project
 ===============
 
-Special thanks go to fritz-smh : https://github.com/fritz-smh/yi-hack
+Special thanks go to **fritz-smh** : https://github.com/fritz-smh/yi-hack
 
 This Yi-hack-v2 project is totally inspired from its own project.
 
@@ -112,11 +112,13 @@ During camera startup, the led will indicate the current status :
 * yellow : camera startup
 * blue blinking : network configuration in progress (connect to wifi, set up the IP address)
 * blue : network configuration is OK. Camera is ready to use.
-* red : network configuration is KO. You should check your **test/wpa_supplicant.conf** file
+* red : network configuration is KO. You should check your **test/wpa_supplicant.conf** file.
 
 Main stream is available from rtsp://\<IP\>/stream1
 
 A secondary MJPEG stream is also available from rtsp://\<IP\>/stream2
+
+Following **hostmit** suggestion, you can now use **test/v2/scripts/capture.sh** to capture a single frame as a JPG file.
 
 
 I want more !
@@ -151,6 +153,7 @@ test/                          Yi hack folder
       libyihackv2.so           Native library to provide hacked features
       tcpsvd                   TCP Service Daemon (http://smarden.org/ipsvd/index.html) to launch FTP Server (ftpd)
     scripts/
+      capture.sh               This script lets capture a single frame as a JPG file
       led.sh                   This script lets manipulate the led state
       startup_modified.sh      This script is called from factory_test.sh when MODIFIED startup (aka RTSP server) is activated
       startup_official.sh      This script is called from factory_test.sh when OFFICIAL startup is activated
