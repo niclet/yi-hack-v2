@@ -1,10 +1,10 @@
 
-Yi-hack-v2 project
+yi-hack-v2 project
 ===============
 
 Special thanks go to **fritz-smh** : https://github.com/fritz-smh/yi-hack
 
-This Yi-hack-v2 project is totally inspired from its own project.
+This yi-hack-v2 project is totally inspired from its own project.
 
 
 Purpose
@@ -26,6 +26,7 @@ This hack includes :
 * Base firmware : 2.1.1_20160429113900
 * Telnet server activated
 * FTP server activated
+* Ability to make a "China only" camera work outside China
 * Ability to choose voice between Chinese, English and French
 * Ability to choose timezone and format of date/time embedded in the video
 
@@ -44,10 +45,11 @@ The firmware comes from http://yi-version.qiniudn.com/@/familymonitor-h21/2.1.1_
 
 Warning, even if a chinese camera can be paired with your device, the application will fail with a -20009 network error code. This is due to recent changes on Xiaomi servers which prevent chinese cameras to work outside China.
 
-**shadow-1** has made really great job for previous camera models (https://github.com/shadow-1/yi-hack-v3). His hack uses Proxychains-ng to bypass restrictions. I'll try to integrate this into my project.
+If you own a chinese camera, you can now use a custom proxy server to make Xiaomi servers think you are located in China. Special thanks to **shadow-1** who has made really great job for previous camera models (https://github.com/shadow-1/yi-hack-v3).
 
+To activate the proxy server, you need to modify **test/yi-hack-v2.cfg**, uncomment and fill the YI\_HACK\_PROXY line. Of course, you need to find a working proxy in China.
 
-Installation on the Yi camera
+Installation on the YI camera
 =============================
 
 The memory card must stay in the camera ! If you remove it, the camera will start without using the hack.

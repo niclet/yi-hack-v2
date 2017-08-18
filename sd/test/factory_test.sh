@@ -41,9 +41,6 @@ fi
 
 # Main hack
 rm -f "$YI_HACK_NATIVE_TRACES"
-#if [ -f /sdcard/test/v2/bin/yihackv2.so ]; then
-#   export LD_PRELOAD=/sdcard/test/v2/bin/yihackv2.so
-#fi
 if [ -f /sdcard/test/v2/bin/libyihackv2.so ]; then
    export LD_PRELOAD=/sdcard/test/v2/bin/libyihackv2.so
 fi
