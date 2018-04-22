@@ -1,3 +1,5 @@
+THIS PROJECT IS OUTDATED AND NOT MAINTAINED ANYMORE
+===============
 
 yi-hack-v2 project
 ===============
